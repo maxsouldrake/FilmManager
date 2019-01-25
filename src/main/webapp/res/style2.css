@@ -2,7 +2,7 @@ body {
     background: url("tlotr.png") no-repeat 50% 50% fixed;
 }
 
-.back {
+.inf-back {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -21,7 +21,7 @@ body {
     border-radius: 5px;
 }
 
-.title-back {
+.inf-title-back {
     width: 100%;
     min-width: 333px;
     background: radial-gradient(circle farthest-side, rgba(240, 245, 255, 0.9), transparent);
@@ -29,27 +29,29 @@ body {
     margin: 10px 0;
 }
 
-.title {
+.inf-title {
     width: 50%;
     min-width: 333px;
     font:  bold 130% Georgia, serif;
     text-shadow: 1px 1px 0 rgba(10, 10, 25, 0.5);
 }
 
-.poster {
+.inf-poster {
     width: 333px;
     height: 500px;
     margin-bottom: 10px;
     box-shadow: 1px 1px 5px rgba(10, 10, 25, 0.7);
 }
 
-.info {
+.inf-info {
     flex-basis: 333px;
     -webkit-box-flex: 1;
     flex-grow: 1;
+    font-size: 22px;
 }
 
-.info table {
+.inf-info table {
+    font-size: 20px;
     font-weight:  600;
     border-spacing: 0 5px;
     background: rgba(235, 240, 255, 0.8);
@@ -61,18 +63,18 @@ body {
     margin-bottom: 10px;
 }
 
-.info table .cell {
+.inf-info table .inf-cell {
     background: linear-gradient(0, rgb(250, 250, 255), transparent);
 }
 
-.info table .head {
+.inf-info table .inf-head {
     text-align: center;
     font-size: 120%;
     padding-bottom: 10px;
 }
 
-.description {
-    font-family: arial,sans-serif;
+.inf-description {
+    font-family: times,serif;
     text-indent: 40px;
     width: calc(90% - 20px);
     min-width: 313px;
@@ -83,19 +85,227 @@ body {
     border-radius: 5px;
 }
 
-.description p {
+.inf-description p {
     font-weight:  600;
     font-size: 120%;
 }
 
-.action {
+.inf-action {
     width: 90%;
 }
 
-.action div {
+.inf-action div {
     width: 30px;
     height: 30px;
     float: right;
+}
+
+.main-back {
+    width: 80%;
+    min-width: 333px;
+    margin: 40px auto;
+}
+
+.main-search {
+    width: 80%;
+    min-width: 333px;
+    margin: auto;
+    outline: 3px solid green;
+}
+
+.main-list {
+    min-width: 333px;
+}
+
+.main-list table{
+    font:  bold 16px times, serif;
+    border-spacing: 0 5px;
+    table-layout: fixed;
+    width:100%;
+    text-align: center;
+    text-shadow: 0 0 1px #898EC9;
+}
+
+.main-list th {
+    color: rgb(245, 250, 255);
+    background: rgba(0, 5, 25, 0.75);
+    font-size: 130%;
+    border-top: 1px solid rgb(245, 250, 255);
+    border-bottom: 1px solid rgb(245, 250, 255);
+    text-shadow: 1px 1px 2px #898EC9;
+}
+
+.main-list tr {
+    box-shadow: 0 0 5px rgb(15,15,45);
+}
+
+.main-list td{
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.title{
+    text-align: left;
+    font-size: 130%;
+}
+
+.main-list tr:nth-child(even) {
+    background: linear-gradient(1deg, rgb(180, 210, 255), rgba(255, 255, 255, 0.9));
+}
+
+.main-list tr:nth-child(odd) {
+    background: linear-gradient(1deg, rgb(205, 230, 255), rgba(255, 255, 255, 0.9));
+}
+
+.col-ny {
+    width: 40px;
+}
+
+.col-gc {
+    width: 80px;
+}
+
+.col-t {
+    width: 40%;
+}
+
+.left-side {
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+
+.right-side {
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+.main-footer {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    align-items: flex-start;
+    min-width: 333px;
+
+    outline: 3px solid orange;
+}
+
+.main-footer form{
+
+    outline: 3px solid orange;
+}
+
+
+a {
+    display: inline-block;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 120%;
+    padding: 5px 0;
+    transition: 0.2s ease-in-out;
+    border-radius: 5px;
+    color: #000000;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+}
+
+a.disabled {
+    pointer-events: none;
+    cursor: default;
+    box-shadow: 0 0 3px rgba(0,0,0,0.3);
+    opacity: 0.5;
+}
+
+a.current-page {
+    pointer-events: none;
+    cursor: default;
+    font-size: 150%;
+    box-shadow: 0 0;
+}
+
+a:hover {
+    box-shadow: 0 0 25px rgb(255,255,255);
+}
+
+a:active {
+    transition: 0s;
+    background: linear-gradient(1deg, rgb(255, 255, 255), rgba(210, 210, 210, 0.9));
+}
+
+.link a {
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+.icon {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    margin-left: 10px;
+    vertical-align: bottom;
+    background: url("icons.png") no-repeat;
+}
+
+.icon-add {
+    background-position: 0 0;
+    margin-right: 5px;
+    margin-left: 0;
+}
+
+.icon-delete {
+    background-position: -24px 0;
+}
+
+.icon-edit {
+    background-position: -49px 0;
+}
+
+.icon-watch {
+    background-position: -74px 0;
+}
+
+.icon-first {
+    background-position: -125px 0;
+    margin: 0;
+}
+
+.icon-prev {
+    background-position: -147px 0;
+    margin: 0;
+}
+
+.icon-next {
+    background-position: -166px 0;
+    margin: 0;
+}
+
+.icon-last {
+    background-position: -188px 0;
+    margin: 0;
+}
+
+
+
+
+
+.class4 {
+
+    outline: 3px solid yellow;
+}
+
+.class5 {
+
+
+    outline: 3px solid pink;
+}
+
+.class6 {
+
+    outline: 3px solid black;
 }
 
 

@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
@@ -7,6 +7,7 @@
     <link rel="icon" type="image/png" href="<c:url value="/res/favicon.png"/>"/>
 </head>
 <body>
+
 <table class="style">
     <c:if test="${filmsCount > 0}">
         <tr>
@@ -107,8 +108,8 @@
     </tr>
 </table>
 <div>
-    <form action="<c:url value="/"/>">
-        <input type="text" name="title" placeholder="title" maxlength="100" title="search by title">
+    <form action="<c:url value="/add"/>" method="post">
+        <input type="text" name="webSearchQuery" placeholder="title" maxlength="128" title="search by title">
         <input type="submit" value="" title="click to search"><span class="icon icon-find"></span>
     </form>
 </div>

@@ -15,13 +15,19 @@ public class Film {
     private String title;
 
     @Column(name = "year")
-    private int year;
+    private short year;
 
     @Column(name = "genre")
     private String genre;
 
+    @Column(name = "country")
+    private String country;
+
     @Column(name = "date")
     private Date date;
+
+    @Column(name = "priority")
+    private byte priority;
 
     @Column(name = "actors")
     private String actors;
@@ -48,11 +54,11 @@ public class Film {
         this.title = title;
     }
 
-    public int getYear() {
+    public short getYear() {
         return year;
     }
 
-    public void setYear(int year) {
+    public void setYear(short year) {
         this.year = year;
     }
 
@@ -64,12 +70,28 @@ public class Film {
         this.genre = genre;
     }
 
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
     public Date getDate() {
         return date;
     }
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public byte getPriority() {
+        return priority;
+    }
+
+    public void setPriority(byte priority) {
+        this.priority = priority;
     }
 
     public String getActors() {

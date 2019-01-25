@@ -8,58 +8,58 @@
 </head>
 
 <body>
-<div align="center" class="back">
-    <div class="title-back">
-        <div class="title">${film.title}</div>
+<div align="center" class="inf-back">
+    <div class="inf-title-back">
+        <div class="inf-title">${film.title}</div>
     </div>
-    <div class="poster">
-        <img width="333" height="500" src="<c:url value="/res/posters/${film.poster}.jpg"/>" alt="poster">
+    <div class="inf-poster">
+        <img width="333" height="500" src="<c:url value="/res/posters/${film.poster}"/>" alt="poster">
     </div>
-    <div class="info">
+    <div class="inf-info">
         <table>
             <tr>
-                <td colspan="2" class="head">Информация:</td>
+                <td colspan="2" class="inf-head">Информация:</td>
                 <td width="10%"></td>
-                <td class="head">В ролях:</td>
+                <td class="inf-head">В ролях:</td>
             </tr>
             <tr>
-                <td class="cell">Год:</td>
-                <td class="cell" align="center">${film.year}</td>
+                <td class="inf-cell">Год:</td>
+                <td class="inf-cell" align="center">${film.year}</td>
 
                 <td></td>
-                <td class="cell">${film.actors.split(", ")[0]}</td>
+                <td class="inf-cell">${film.actors.split(", ")[0]}</td>
             </tr>
             <tr>
-                <td class="cell">Жанр:</td>
-                <td class="cell" align="center">${film.genre}</td>
+                <td class="inf-cell">Жанр:</td>
+                <td class="inf-cell" align="center">${film.genre}</td>
 
                 <td></td>
-                <td class="cell">${film.actors.split(", ")[1]}</td>
+                <td class="inf-cell">${film.actors.split(", ")[1]}</td>
             </tr>
             <tr>
-                <td class="cell">Страна:</td>
-                <td class="cell" align="center">Великобритания</td>
+                <td class="inf-cell">Страна:</td>
+                <td class="inf-cell" align="center">${film.country}</td>
                 <td></td>
-                <td class="cell">${film.actors.split(", ")[2]}</td>
+                <td class="inf-cell">${film.actors.split(", ")[2]}</td>
             </tr>
             <tr>
-                <td class="cell">Последнее обращение:</td>
-                <td class="cell" align="center">${film.date}</td>
+                <td class="inf-cell">Последнее обращение:</td>
+                <td class="inf-cell" align="center">${film.date}</td>
                 <td></td>
-                <td class="cell">${film.actors.split(", ")[3]}</td>
+                <td class="inf-cell">${film.actors.split(", ")[3]}</td>
             </tr>
             <tr>
-                <td class="cell">Приоритет:</td>
-                <td class="cell" align="center">10</td>
+                <td class="inf-cell">Приоритет:</td>
+                <td class="inf-cell" align="center">${film.priority}</td>
                 <td></td>
-                <td class="cell">${film.actors.split(", ")[4]}</td>
+                <td class="inf-cell">${film.actors.split(", ")[4]}</td>
             </tr>
         </table>
-        <div class="description">
+        <div class="inf-description">
             <p>Описание</p>
             ${film.description}
         </div>
-        <div class="action">
+        <div class="inf-action">
             <div>ed
             </div>
             <div>del

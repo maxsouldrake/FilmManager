@@ -14,4 +14,6 @@ public interface FilmService {
     int filmsCount();
 
     boolean checkTitle(String title);
+
+    Film getFilmFromWeb(String webSearchQuery);
 }

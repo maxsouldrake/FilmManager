@@ -26,7 +26,7 @@ public class FilmController {
         int filmsCount = filmService.filmsCount();
         int pagesCount = (filmsCount + 9)/10;
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("films");
+        modelAndView.setViewName("films2");
         modelAndView.addObject("page", page);
         modelAndView.addObject("filmsList", films);
         modelAndView.addObject("filmsCount", filmsCount);
@@ -44,23 +44,29 @@ public class FilmController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/add", method = RequestMethod.GET)
+    /*@RequestMapping(value = "/add", method = RequestMethod.GET)
     public ModelAndView addPage(@ModelAttribute("message") String message) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("editPage");
         return modelAndView;
-    }
+    }*/
+
+
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public ModelAndView addFilm(@ModelAttribute("film") Film film) {
+    public ModelAndView addFilm(@ModelAttribute("webSearchQuery") String webSearchQuery) {
+        Film film = filmService.getFilmFromWeb(webSearchQuery);
         ModelAndView modelAndView = new ModelAndView();
+        if (film.getCountry().equals("mistake")) {
+            modelAndView.setViewName("redirect:" + film.getTitle());
+        } else
         if (filmService.checkTitle(film.getTitle())) {
             modelAndView.setViewName("redirect:/");
             modelAndView.addObject("page", page);
             filmService.add(film);
         } else {
             modelAndView.addObject("message","part with title \"" + film.getTitle() + "\" already exists");
-            modelAndView.setViewName("redirect:/add");
+            modelAndView.setViewName("redirect:/");
         }
         return modelAndView;
     }
