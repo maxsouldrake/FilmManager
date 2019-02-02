@@ -26,7 +26,7 @@ public class FilmController {
         int filmsCount = filmService.filmsCount();
         int pagesCount = (filmsCount + 9)/10;
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("films2");
+        modelAndView.setViewName("films");
         modelAndView.addObject("page", page);
         modelAndView.addObject("filmsList", films);
         modelAndView.addObject("filmsCount", filmsCount);
@@ -44,18 +44,18 @@ public class FilmController {
         return modelAndView;
     }
 
-    /*@RequestMapping(value = "/add", method = RequestMethod.GET)
-    public ModelAndView addPage(@ModelAttribute("message") String message) {
+    @RequestMapping(value = "/add", method = RequestMethod.GET)
+    public ModelAndView addPage(@ModelAttribute("webSearchQuery") String webSearchQuery,
+                                @ModelAttribute("message") String message) {
+        Film film = filmService.getFilmFromWeb(webSearchQuery);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("editPage");
+        modelAndView.addObject("film", film);
         return modelAndView;
-    }*/
-
-
+    }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public ModelAndView addFilm(@ModelAttribute("webSearchQuery") String webSearchQuery) {
-        Film film = filmService.getFilmFromWeb(webSearchQuery);
+    public ModelAndView addFilm(@ModelAttribute("film") Film film) {
         ModelAndView modelAndView = new ModelAndView();
         if (film.getCountry().equals("mistake")) {
             modelAndView.setViewName("redirect:" + film.getTitle());
@@ -70,6 +70,7 @@ public class FilmController {
         }
         return modelAndView;
     }
+
 
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     public ModelAndView editPage(@PathVariable("id") int id,

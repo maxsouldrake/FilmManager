@@ -80,23 +80,21 @@ public class FilmServiceImpl implements FilmService {
             String queryValue = URLEncoder.encode(webSearchQuery, "windows-1251");
             doc = Jsoup.connect(url + "/index.php?kp_query=" + queryValue)
                     .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) " +
-                            "AppleWebKit/537.36 (KHTML, like Gecko) " +
-                            "Chrome/71.0.3578.98 Safari/537.36 OPR/57.0.3098.116")
-                    .referrer("http://localhost:8080/")
+                            "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36")
+                    .referrer(url)
                     .get();
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
 
-        String filmLink = "";
+        String filmLink;
         try {
             filmLink = doc.select("div.most_wanted div.info a.js-serp-metrika").first().attr("href");
             doc = Jsoup.connect(url + filmLink)
                     .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) " +
-                            "AppleWebKit/537.36 (KHTML, like Gecko) " +
-                            "Chrome/71.0.3578.98 Safari/537.36 OPR/57.0.3098.116")
-                    .referrer("http://localhost:8080/")
+                            "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36")
+                    .referrer(url)
                     .get();
         } catch (Exception e) {
             e.printStackTrace();
@@ -116,7 +114,7 @@ public class FilmServiceImpl implements FilmService {
         } catch (Exception e) {
             e.printStackTrace();
             film.setCountry("mistake");
-            film.setTitle(url + filmLink);
+            film.setTitle(url);
             return film;
         }
         try {

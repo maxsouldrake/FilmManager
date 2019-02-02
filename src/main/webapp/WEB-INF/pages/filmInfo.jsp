@@ -18,41 +18,34 @@
     <div class="inf-info">
         <table>
             <tr>
-                <td colspan="2" class="inf-head">Информация:</td>
-                <td width="10%"></td>
-                <td class="inf-head">В ролях:</td>
+                <th colspan="2">Информация:</th>
+                <th width="10%" rowspan="6"></th>
+                <th>В ролях:</th>
             </tr>
             <tr>
-                <td class="inf-cell">Год:</td>
-                <td class="inf-cell" align="center">${film.year}</td>
-
-                <td></td>
-                <td class="inf-cell">${film.actors.split(", ")[0]}</td>
+                <td align="left">Год:</td>
+                <td>${film.year}</td>
+                <td>${film.actors.split(", ")[0]}</td>
             </tr>
             <tr>
-                <td class="inf-cell">Жанр:</td>
-                <td class="inf-cell" align="center">${film.genre}</td>
-
-                <td></td>
-                <td class="inf-cell">${film.actors.split(", ")[1]}</td>
+                <td align="left">Жанр:</td>
+                <td>${film.genre}</td>
+                <td>${film.actors.split(", ")[1]}</td>
             </tr>
             <tr>
-                <td class="inf-cell">Страна:</td>
-                <td class="inf-cell" align="center">${film.country}</td>
-                <td></td>
-                <td class="inf-cell">${film.actors.split(", ")[2]}</td>
+                <td align="left">Страна:</td>
+                <td>${film.country}</td>
+                <td>${film.actors.split(", ")[2]}</td>
             </tr>
             <tr>
-                <td class="inf-cell">Последнее обращение:</td>
-                <td class="inf-cell" align="center">${film.date}</td>
-                <td></td>
-                <td class="inf-cell">${film.actors.split(", ")[3]}</td>
+                <td align="left">Приоритет:</td>
+                <td>${film.priority}</td>
+                <td>${film.actors.split(", ")[3]}</td>
             </tr>
             <tr>
-                <td class="inf-cell">Приоритет:</td>
-                <td class="inf-cell" align="center">${film.priority}</td>
-                <td></td>
-                <td class="inf-cell">${film.actors.split(", ")[4]}</td>
+                <td align="left">Последнее обращение:</td>
+                <td>${film.date}</td>
+                <td>${film.actors.split(", ")[4]}</td>
             </tr>
         </table>
         <div class="inf-description">
@@ -60,9 +53,20 @@
             ${film.description}
         </div>
         <div class="inf-action">
-            <div>ed
+            <div>
+                <a href="<c:url value="/edit/${film.id}"/>" title="редактировать">
+                    <span class="icon icon-edit"></span>
+                </a>
             </div>
-            <div>del
+            <div>
+                <a href="<c:url value="/delete/${film.id}"/>" title="удалить">
+                    <span class="icon icon-delete"></span>
+                </a>
+            </div>
+            <div>
+                <a href="<c:url value="/"/>" title="вернуться к списку фильмов">
+                    <span class="icon icon-watch"></span>
+                </a>
             </div>
         </div>
     </div>

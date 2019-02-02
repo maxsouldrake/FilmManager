@@ -3,13 +3,8 @@ body {
 }
 
 .inf-back {
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
-    -ms-flex-wrap: wrap;
     flex-wrap: wrap;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
     justify-content: center;
     align-items: flex-start;
     width: 80%;
@@ -32,8 +27,17 @@ body {
 .inf-title {
     width: 50%;
     min-width: 333px;
-    font:  bold 130% Georgia, serif;
+    font:  bold 150% Georgia, serif;
     text-shadow: 1px 1px 0 rgba(10, 10, 25, 0.5);
+}
+
+.inf-title input{
+    width: 100%;
+    background: none;
+    border: none;
+    text-align: center;
+    font: bold 130% Georgia, serif;
+    box-shadow: 0 0 5px rgb(100, 100, 200);
 }
 
 .inf-poster {
@@ -61,14 +65,27 @@ body {
     width: 90%;
     min-width: 333px;
     margin-bottom: 10px;
+    text-align: center;
 }
 
-.inf-info table .inf-cell {
+.inf-info table input{
+    font: bold 20px times,serif;
+    width: 100%;
+    background: none;
+    border: none;
+    text-align: center;
+    box-shadow: 0 0 5px rgb(100, 100, 200);
+}
+
+.inf-info table input[type=number]::-webkit-inner-spin-button {
+    display: none;
+}
+
+.inf-info td {
     background: linear-gradient(0, rgb(250, 250, 255), transparent);
 }
 
-.inf-info table .inf-head {
-    text-align: center;
+.inf-info th {
     font-size: 120%;
     padding-bottom: 10px;
 }
@@ -90,31 +107,208 @@ body {
     font-size: 120%;
 }
 
+.inf-description textarea{
+    font-family: times,serif;
+    font-size: 22px;
+    width: 100%;
+    background: none;
+    border: none;
+    box-shadow: 0 0 5px rgb(100, 100, 200);
+    resize: none;
+    height: 215px;
+}
+
 .inf-action {
     width: 90%;
+    margin-top: 20px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+a {
+    display: inline-block;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 120%;
+    padding: 5px 0;
+    transition: 0.2s ease-in-out;
+    border-radius: 5px;
+    background: linear-gradient(rgb(210, 215, 235), rgb(240, 240, 240));
+    color: black;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+}
+
+
+a.disabled {
+    pointer-events: none;
+    cursor: default;
+    box-shadow: 0 0 3px rgba(0,0,0,0.3);
+    opacity: 0.5;
+}
+
+a.current-page {
+    pointer-events: none;
+    cursor: default;
+    font-size: 150%;
+    box-shadow: 0 0;
+    background: transparent;
+}
+
+a:hover {
+    box-shadow: 0 0 25px rgb(255,255,255);
+}
+
+a:active {
+    background: linear-gradient(rgb(220, 220, 220), rgb(255, 255, 255));
+}
+
+.link a {
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+
+input[type=submit] {
+    width: 30%;
+    height: 30px;
+    font: bold 22px times,serif;
+    border:none;
+    border-radius: 5px;
+    transition: 0.2s ease-in-out;
+    background: linear-gradient(rgb(210, 215, 235), rgb(240, 240, 240));
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+    cursor: pointer;
+}
+
+input[type=submit]:active {
+    background: linear-gradient(rgb(220, 220, 220), rgb(255, 255, 255));
+}
+
+input:hover {
+    box-shadow: 0 0 25px rgb(255,255,255);
 }
 
 .inf-action div {
-    width: 30px;
+    padding: 0 10px;
     height: 30px;
     float: right;
 }
 
 .main-back {
-    width: 80%;
+    width: 60%;
     min-width: 333px;
     margin: 40px auto;
 }
 
+.main-addrand {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+
+}
+
+.main-add {
+    width: 300px;
+    margin: auto 10px 10px;
+
+}
+
+.main-add input{
+    width: 49%;
+    height: 30px;
+    border: none;
+    border-radius: 3px;
+    background: linear-gradient(rgb(180, 210, 255), rgb(255, 255, 255));
+}
+
+
+.main-add input[type=text]{
+    width: 60%;
+
+
+}
+
+.main-add input[type=submit]{
+    vertical-align: middle;
+    width: 30%;
+}
+
+.main-random {
+    width: 300px;
+    margin: auto 10px 10px;
+
+
+}
+
+.main-random a{
+    width: 70%;
+}
+
 .main-search {
-    width: 80%;
+    width: 100%;
     min-width: 333px;
     margin: auto;
-    outline: 3px solid green;
+    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+
+    vertical-align: middle;
 }
+
+
+.main-search-field {
+    width: 80%;
+    min-width: 283px;
+}
+
+.main-search-field div{
+    width: 283px;
+    margin-bottom: 4px;
+    flex-basis: 283px;
+    flex-grow: 1;
+    float:right;
+
+}
+
+.main-search-field input{
+    margin:0 2px;
+    width: 47%;
+    height: 30px;
+    border: none;
+    border-radius: 3px;
+    background: linear-gradient(rgb(180, 210, 255), rgb(255, 255, 255));
+}
+
+.main-search-button {
+    width: 50px;
+
+    height: 30px;
+    margin: auto 0;
+}
+
+
+
+
 
 .main-list {
     min-width: 333px;
+
 }
 
 .main-list table{
@@ -124,37 +318,55 @@ body {
     width:100%;
     text-align: center;
     text-shadow: 0 0 1px #898EC9;
+
 }
 
 .main-list th {
     color: rgb(245, 250, 255);
-    background: rgba(0, 5, 25, 0.75);
+    background: rgb(45, 45, 55);
     font-size: 130%;
     border-top: 1px solid rgb(245, 250, 255);
     border-bottom: 1px solid rgb(245, 250, 255);
     text-shadow: 1px 1px 2px #898EC9;
+
 }
 
 .main-list tr {
     box-shadow: 0 0 5px rgb(15,15,45);
+    height: 35px;
+
 }
 
-.main-list td{
+.main-list td {
     overflow: hidden;
     text-overflow: ellipsis;
+
 }
 
-.title{
+.main-list td + td {
+    transform: translateX(-1px);
+
+}
+
+.title {
     text-align: left;
     font-size: 130%;
 }
 
+.main-list tr:nth-child(even) td{
+    background: linear-gradient(rgb(180, 210, 255), rgb(255, 255, 255));
+}
+
+.main-list tr:nth-child(odd) td{
+    background: linear-gradient(rgb(205, 230, 255), rgb(255, 255, 255));
+}
+
 .main-list tr:nth-child(even) {
-    background: linear-gradient(1deg, rgb(180, 210, 255), rgba(255, 255, 255, 0.9));
+    background: linear-gradient(rgb(180, 210, 255), rgb(255, 255, 255));
 }
 
 .main-list tr:nth-child(odd) {
-    background: linear-gradient(1deg, rgb(205, 230, 255), rgba(255, 255, 255, 0.9));
+    background: linear-gradient(rgb(205, 230, 255), rgb(255, 255, 255));
 }
 
 .col-ny {
@@ -194,51 +406,11 @@ body {
     outline: 3px solid orange;
 }
 
-.main-footer form{
+.main-footer{
 
     outline: 3px solid orange;
 }
 
-
-a {
-    display: inline-block;
-    text-decoration: none;
-    text-transform: uppercase;
-    font-size: 120%;
-    padding: 5px 0;
-    transition: 0.2s ease-in-out;
-    border-radius: 5px;
-    color: #000000;
-    box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
-}
-
-a.disabled {
-    pointer-events: none;
-    cursor: default;
-    box-shadow: 0 0 3px rgba(0,0,0,0.3);
-    opacity: 0.5;
-}
-
-a.current-page {
-    pointer-events: none;
-    cursor: default;
-    font-size: 150%;
-    box-shadow: 0 0;
-}
-
-a:hover {
-    box-shadow: 0 0 25px rgb(255,255,255);
-}
-
-a:active {
-    transition: 0s;
-    background: linear-gradient(1deg, rgb(255, 255, 255), rgba(210, 210, 210, 0.9));
-}
-
-.link a {
-    padding-right: 10px;
-    padding-left: 10px;
-}
 
 .icon {
     display: inline-block;
@@ -289,24 +461,6 @@ a:active {
 }
 
 
-
-
-
-.class4 {
-
-    outline: 3px solid yellow;
-}
-
-.class5 {
-
-
-    outline: 3px solid pink;
-}
-
-.class6 {
-
-    outline: 3px solid black;
-}
 
 
 
