@@ -12,6 +12,10 @@ import java.util.List;
 @Controller
 public class FilmController {
     private int page;
+    String titleSearch;
+    String yearSearch;
+    String genreSearch;
+    String countrySearch;
 
     private FilmService filmService;
 
@@ -21,17 +25,29 @@ public class FilmController {
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public ModelAndView allFilms(@RequestParam(defaultValue = "1") int page) {
-        List<Film> films = filmService.allFilms(page);
-        int filmsCount = filmService.filmsCount();
+    public ModelAndView allFilms(@RequestParam(defaultValue = "1") int page,
+                                 @RequestParam(required = false, defaultValue = "") String titleSearch,
+                                 @RequestParam(required = false, defaultValue = "") String yearSearch,
+                                 @RequestParam(required = false, defaultValue = "") String genreSearch,
+                                 @RequestParam(required = false, defaultValue = "") String countrySearch) {
+        List<Film> films = filmService.allFilms(page, titleSearch, yearSearch, genreSearch, countrySearch);
+        int filmsCount = filmService.filmsCount(titleSearch, yearSearch, genreSearch, countrySearch);
         int pagesCount = (filmsCount + 9)/10;
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("films");
         modelAndView.addObject("page", page);
+        modelAndView.addObject("titleSearch", titleSearch);
+        modelAndView.addObject("yearSearch", yearSearch);
+        modelAndView.addObject("genreSearch", genreSearch);
+        modelAndView.addObject("countrySearch", countrySearch);
         modelAndView.addObject("filmsList", films);
         modelAndView.addObject("filmsCount", filmsCount);
         modelAndView.addObject("pagesCount", pagesCount);
         this.page = page;
+        this.titleSearch = titleSearch;
+        this.yearSearch = yearSearch;
+        this.genreSearch = genreSearch;
+        this.countrySearch = countrySearch;
         return modelAndView;
     }
 
@@ -99,7 +115,7 @@ public class FilmController {
     @RequestMapping(value="/delete/{id}", method = RequestMethod.GET)
     public ModelAndView deleteFilm(@PathVariable("id") int id) {
         ModelAndView modelAndView = new ModelAndView();
-        int filmsCount = filmService.filmsCount();
+        int filmsCount = filmService.filmsCount(titleSearch, yearSearch, genreSearch, countrySearch);
         int page = ((filmsCount - 1) % 10 == 0 && filmsCount > 10 && this.page == (filmsCount + 9)/10) ?
                 this.page - 1 : this.page;
         modelAndView.setViewName("redirect:/");

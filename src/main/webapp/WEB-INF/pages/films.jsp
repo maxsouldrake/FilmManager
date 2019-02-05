@@ -24,16 +24,21 @@
     <div class="main-search">
         <div class="main-search-field">
             <div>
-                <input type="search" name="titleSearch" placeholder="title" value="${titleSearch}" maxlength="100" title="search by title">
-                <input type="search" name="yearSearch" placeholder="year" value="${yearSearch}" maxlength="100" title="search by year">
+                <input type="search" name="titleSearch" placeholder="title" value="${titleSearch}"
+                       maxlength="128" title="search by title" form="search-form">
+                <input type="search" name="yearSearch" placeholder="year" value="${yearSearch}"
+                       maxlength="4" title="search by year" form="search-form">
             </div>
             <div>
-                <input type="search" name="genreSearch" placeholder="genre" value="${genreSearch}" maxlength="100" title="search by genre">
-                <input type="search" name="countrySearch" placeholder="country" value="${countrySearch}" maxlength="100" title="search by country">
+                <input type="search" name="genreSearch" placeholder="genre" value="${genreSearch}"
+                       maxlength="16" title="search by genre" form="search-form">
+                <input type="search" name="countrySearch" placeholder="country" value="${countrySearch}"
+                       maxlength="16" title="search by country" form="search-form">
             </div>
         </div>
         <div class="main-search-button">
-            <form action="">
+            <form action="<c:url value="/"/>" id="search-form">
+                <input type="hidden" name="page" value="${page}">
                 <input type="submit" value="" title="click to search"><span class="icon icon-find"></span>
             </form>
         </div>
@@ -61,7 +66,7 @@
             <c:if test="${filmsCount == 0}">
                 <tr>
                     <td colspan="5" style="font-size: 150%" class="left-side right-side">
-                        <c:if test="${allFilmssCount == 0}">
+                        <c:if test="${allFilmsCount == 0}">
                             the list is empty but you can add a new film
                         </c:if>
                         <c:if test="${allFilmsCount != 0}">
@@ -70,7 +75,6 @@
                     </td>
                 </tr>
             </c:if>
-
             <tr>
                 <td colspan="5" class="left-side link right-side">
                     <div class="main-footer">

@@ -31,8 +31,8 @@ public class FilmServiceImpl implements FilmService {
 
     @Override
     @Transactional
-    public List<Film> allFilms(int page) {
-        return filmDAO.allFilms(page);
+    public List<Film> allFilms(int page, String titleSearch, String yearSearch, String genreSearch, String countrySearch) {
+        return filmDAO.allFilms(page, titleSearch, yearSearch, genreSearch, countrySearch);
     }
 
     @Override
@@ -61,8 +61,14 @@ public class FilmServiceImpl implements FilmService {
 
     @Override
     @Transactional
-    public int filmsCount() {
-        return filmDAO.filmsCount();
+    public int filmsCount(String titleSearch, String yearSearch, String genreSearch, String countrySearch) {
+        return filmDAO.filmsCount(titleSearch, yearSearch, genreSearch, countrySearch);
+    }
+
+    @Override
+    @Transactional
+    public int allFilmsCount() {
+        return filmDAO.allFilmsCount();
     }
 
     @Override

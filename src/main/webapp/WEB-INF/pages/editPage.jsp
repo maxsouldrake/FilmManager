@@ -36,7 +36,7 @@
             <tr>
                 <td class="cell">Жанр:</td>
                 <td class="cell" align="center">
-                    <input type="text" name="genre" placeholder="genre" value="${film.genre}" maxlength="32" required
+                    <input type="text" name="genre" placeholder="genre" value="${film.genre}" maxlength="16" required
                            form="add-form">
                 </td>
                 <td class="cell">${film.actors.split(", ")[1]}</td>

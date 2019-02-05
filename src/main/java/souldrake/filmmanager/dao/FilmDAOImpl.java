@@ -2,6 +2,7 @@ package souldrake.filmmanager.dao;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import souldrake.filmmanager.model.Film;
@@ -19,9 +20,18 @@ public class FilmDAOImpl implements FilmDAO {
 
     @Override
     @SuppressWarnings("unchecked")
-    public List<Film> allFilms(int page) {
+    public List<Film> allFilms(int page,  String titleSearch, String yearSearch, String genreSearch, String countrySearch) {
         Session session = sessionFactory.getCurrentSession();
-        return session.createQuery("from Film").setFirstResult(10 * (page - 1)).setMaxResults(10).list();
+        Query query = session.createQuery("from Film where 1 = 1 and " +
+                "(:titleSearch is null or lower(title) like lower(:titleSearch)) and " +
+                "(:yearSearch is null or lower(year) like lower(:yearSearch)) and " +
+                "(:genreSearch is null or lower(genre) like lower(:genreSearch)) and " +
+                "(:countrySearch is null or lower(country) like lower(:countrySearch))");
+        query.setParameter("titleSearch", "%" + titleSearch + "%");
+        query.setParameter("yearSearch", "%" + yearSearch + "%");
+        query.setParameter("genreSearch", "%" + genreSearch + "%");
+        query.setParameter("countrySearch", "%" + countrySearch + "%");
+        return query.setFirstResult(10 * (page - 1)).setMaxResults(10).list();
     }
 
     @Override
@@ -48,8 +58,24 @@ public class FilmDAOImpl implements FilmDAO {
         return session.get(Film.class, id);
     }
 
+
     @Override
-    public int filmsCount() {
+    public int filmsCount(String titleSearch, String yearSearch, String genreSearch, String countrySearch) {
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("select count(*) from Film where 1 = 1 and " +
+                "(:titleSearch is null or lower(title) like lower(:titleSearch)) and " +
+                "(:yearSearch is null or lower(year) like lower(:yearSearch)) and " +
+                "(:genreSearch is null or lower(genre) like lower(:genreSearch)) and " +
+                "(:countrySearch is null or lower(country) like lower(:countrySearch))");
+        query.setParameter("titleSearch", "%" + titleSearch + "%");
+        query.setParameter("yearSearch", "%" + yearSearch + "%");
+        query.setParameter("genreSearch", "%" + genreSearch + "%");
+        query.setParameter("countrySearch", "%" + countrySearch + "%");
+        return ((Number) query.getSingleResult()).intValue();
+    }
+
+    @Override
+    public int allFilmsCount() {
         Session session = sessionFactory.getCurrentSession();
         return session.createQuery("select count(*) from Film", Number.class).getSingleResult().intValue();
     }
