@@ -24,21 +24,20 @@
     <div class="main-search">
         <div class="main-search-field">
             <div>
-                <input type="search" name="titleSearch" placeholder="title" value="${titleSearch}"
-                       maxlength="128" title="search by title" form="search-form">
-                <input type="search" name="yearSearch" placeholder="year" value="${yearSearch}"
-                       maxlength="4" title="search by year" form="search-form">
-            </div>
-            <div>
                 <input type="search" name="genreSearch" placeholder="genre" value="${genreSearch}"
                        maxlength="16" title="search by genre" form="search-form">
                 <input type="search" name="countrySearch" placeholder="country" value="${countrySearch}"
                        maxlength="16" title="search by country" form="search-form">
             </div>
+            <div>
+                <input type="search" name="titleSearch" placeholder="title" value="${titleSearch}"
+                       maxlength="128" title="search by title" form="search-form">
+                <input type="search" name="yearSearch" placeholder="year" value="${yearSearch}"
+                       maxlength="4" title="search by year" form="search-form">
+            </div>
         </div>
         <div class="main-search-button">
             <form action="<c:url value="/"/>" id="search-form">
-                <input type="hidden" name="page" value="${page}">
                 <input type="submit" value="" title="click to search"><span class="icon icon-find"></span>
             </form>
         </div>
@@ -53,7 +52,7 @@
                     <th class="col-gc">genre</th>
                     <th class="col-gc right-side">country</th>
                 </tr>
-                <c:forEach var="film" items="${filmsList}" varStatus="i">
+                <c:forEach var="film" items="${filmList}" varStatus="i">
                     <tr style="cursor: pointer" onclick="location.href = '/info/${film.id}'">
                         <td class="left-side">${i.index + 1 + (page - 1) * 10}</td>
                         <td class="title">${film.title}</td>
@@ -78,18 +77,45 @@
             <tr>
                 <td colspan="5" class="left-side link right-side">
                     <div class="main-footer">
+                        <div class="class6">
+                            Всего фильмов: ${allFilmsCount}
+                        </div>
                         <div class="class5">
                             <c:if test="${pagesCount > 1}">
                                 <c:set value="disabled" var="disabled"/>
                                 <c:set value="" var="active"/>
                                 <c:url value="/" var="url">
                                     <c:param name="page" value="1"/>
+                                    <c:if test="${!empty titleSearch}">
+                                        <c:param name="titleSearch" value="${titleSearch}"/>
+                                    </c:if>
+                                    <c:if test="${!empty yearSearch}">
+                                        <c:param name="yearSearch" value="${yearSearch}"/>
+                                    </c:if>
+                                    <c:if test="${!empty genreSearch}">
+                                        <c:param name="genreSearch" value="${genreSearch}"/>
+                                    </c:if>
+                                    <c:if test="${!empty countrySearch}">
+                                        <c:param name="countrySearch" value="${countrySearch}"/>
+                                    </c:if>
                                 </c:url>
                                 <a class="${page == 1 ? disabled : active}" href="${url}">
                                     &nbsp<span class="icon icon-first"></span>&nbsp
                                 </a>
                                 <c:url value="/" var="url">
                                     <c:param name="page" value="${page - 1}"/>
+                                    <c:if test="${!empty titleSearch}">
+                                        <c:param name="titleSearch" value="${titleSearch}"/>
+                                    </c:if>
+                                    <c:if test="${!empty yearSearch}">
+                                        <c:param name="yearSearch" value="${yearSearch}"/>
+                                    </c:if>
+                                    <c:if test="${!empty genreSearch}">
+                                        <c:param name="genreSearch" value="${genreSearch}"/>
+                                    </c:if>
+                                    <c:if test="${!empty countrySearch}">
+                                        <c:param name="countrySearch" value="${countrySearch}"/>
+                                    </c:if>
                                 </c:url>
                                 <a class="${page == 1 ? disabled : active}" href="${url}">
                                     &nbsp<span class="icon icon-prev"></span>&nbsp
@@ -119,6 +145,18 @@
                                 <c:forEach begin="${begin}" end="${end}" step="1" varStatus="i">
                                     <c:url value="/" var="url">
                                         <c:param name="page" value="${i.index}"/>
+                                        <c:if test="${!empty titleSearch}">
+                                            <c:param name="titleSearch" value="${titleSearch}"/>
+                                        </c:if>
+                                        <c:if test="${!empty yearSearch}">
+                                            <c:param name="yearSearch" value="${yearSearch}"/>
+                                        </c:if>
+                                        <c:if test="${!empty genreSearch}">
+                                            <c:param name="genreSearch" value="${genreSearch}"/>
+                                        </c:if>
+                                        <c:if test="${!empty countrySearch}">
+                                            <c:param name="countrySearch" value="${countrySearch}"/>
+                                        </c:if>
                                     </c:url>
                                     <c:set value="current-page" var="current"/>
                                     <c:set value="" var="perspective"/>
@@ -127,12 +165,36 @@
 
                                 <c:url value="/" var="url">
                                     <c:param name="page" value="${page + 1}"/>
+                                    <c:if test="${!empty titleSearch}">
+                                        <c:param name="titleSearch" value="${titleSearch}"/>
+                                    </c:if>
+                                    <c:if test="${!empty yearSearch}">
+                                        <c:param name="yearSearch" value="${yearSearch}"/>
+                                    </c:if>
+                                    <c:if test="${!empty genreSearch}">
+                                        <c:param name="genreSearch" value="${genreSearch}"/>
+                                    </c:if>
+                                    <c:if test="${!empty countrySearch}">
+                                        <c:param name="countrySearch" value="${countrySearch}"/>
+                                    </c:if>
                                 </c:url>
                                 <a class="${page == pagesCount ? disabled : active}" href="${url}">
                                     &nbsp<span class="icon icon-next"></span>&nbsp
                                 </a>
                                 <c:url value="/" var="url">
                                     <c:param name="page" value="${pagesCount}"/>
+                                    <c:if test="${!empty titleSearch}">
+                                        <c:param name="titleSearch" value="${titleSearch}"/>
+                                    </c:if>
+                                    <c:if test="${!empty yearSearch}">
+                                        <c:param name="yearSearch" value="${yearSearch}"/>
+                                    </c:if>
+                                    <c:if test="${!empty genreSearch}">
+                                        <c:param name="genreSearch" value="${genreSearch}"/>
+                                    </c:if>
+                                    <c:if test="${!empty countrySearch}">
+                                        <c:param name="countrySearch" value="${countrySearch}"/>
+                                    </c:if>
                                 </c:url>
                                 <a class="${page == pagesCount ? disabled : active}" href="${url}">
                                     &nbsp<span class="icon icon-last"></span>&nbsp
@@ -140,7 +202,7 @@
                             </c:if>
                         </div>
                         <div class="class6">
-                            Total number Of films: ${filmsCount}
+                            Найдено фильмов: ${filmsCount}
                         </div>
                     </div>
                 </td>

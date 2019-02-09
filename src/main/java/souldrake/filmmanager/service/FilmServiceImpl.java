@@ -73,8 +73,8 @@ public class FilmServiceImpl implements FilmService {
 
     @Override
     @Transactional
-    public boolean checkTitle(String title) {
-        return filmDAO.checkTitle(title);
+    public boolean isUnique(String title, short year) {
+        return filmDAO.isUnique(title, year);
     }
 
     @Override
@@ -119,8 +119,8 @@ public class FilmServiceImpl implements FilmService {
             film.setYear(Short.parseShort(filmYear));
         } catch (Exception e) {
             e.printStackTrace();
-            film.setCountry("mistake");
-            film.setTitle(url);
+            film.setTitle("mistake");
+            film. setDescription("Кажется что-то пошло не так");
             return film;
         }
         try {
@@ -138,7 +138,12 @@ public class FilmServiceImpl implements FilmService {
         try {
             StringBuilder stringBuilder = new StringBuilder();
             for (int i = 0; i < 5; i++) {
-                String actor = doc.select("div#actorList.clearfix ul li a").get(i).text();
+                String actor;
+                try {
+                    actor = doc.select("div#actorList.clearfix ul li a").get(i).text();
+                } catch (Exception e) {
+                    break;
+                }
                 stringBuilder.append(actor);
                 if (i < 4 && !actor.equals("")) {
                     stringBuilder.append(", ");

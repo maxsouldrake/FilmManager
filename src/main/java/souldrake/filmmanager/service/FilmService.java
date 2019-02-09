@@ -14,7 +14,7 @@ public interface FilmService {
     int filmsCount(String titleSearch, String yearSearch, String genreSearch, String countrySearch);
     int allFilmsCount();
 
-    boolean checkTitle(String title);
+    boolean isUnique(String title, short year);
 
     Film getFilmFromWeb(String webSearchQuery);
 }

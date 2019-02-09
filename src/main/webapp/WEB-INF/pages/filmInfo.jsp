@@ -64,7 +64,22 @@
                 </a>
             </div>
             <div>
-                <a href="<c:url value="/"/>" title="вернуться к списку фильмов">
+                <c:url value="/" var="url">
+                    <c:param name="page" value="${page}"/>
+                    <c:if test="${!empty titleSearch}">
+                        <c:param name="titleSearch" value="${titleSearch}"/>
+                    </c:if>
+                    <c:if test="${!empty yearSearch}">
+                        <c:param name="yearSearch" value="${yearSearch}"/>
+                    </c:if>
+                    <c:if test="${!empty genreSearch}">
+                        <c:param name="genreSearch" value="${genreSearch}"/>
+                    </c:if>
+                    <c:if test="${!empty countrySearch}">
+                        <c:param name="countrySearch" value="${countrySearch}"/>
+                    </c:if>
+                </c:url>
+                <a href="${url}" title="вернуться к списку фильмов">
                     <span class="icon icon-watch"></span>
                 </a>
             </div>

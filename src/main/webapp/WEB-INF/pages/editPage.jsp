@@ -88,6 +88,9 @@
         </div>
     </div>
 </div>
+<div>
+    ${message}
+</div>
 </body>
 </html>
 

@@ -12,10 +12,10 @@ import java.util.List;
 @Controller
 public class FilmController {
     private int page;
-    String titleSearch;
-    String yearSearch;
-    String genreSearch;
-    String countrySearch;
+    private String titleSearch;
+    private String yearSearch;
+    private String genreSearch;
+    private String countrySearch;
 
     private FilmService filmService;
 
@@ -30,19 +30,21 @@ public class FilmController {
                                  @RequestParam(required = false, defaultValue = "") String yearSearch,
                                  @RequestParam(required = false, defaultValue = "") String genreSearch,
                                  @RequestParam(required = false, defaultValue = "") String countrySearch) {
-        List<Film> films = filmService.allFilms(page, titleSearch, yearSearch, genreSearch, countrySearch);
+        List<Film> filmList = filmService.allFilms(page, titleSearch, yearSearch, genreSearch, countrySearch);
         int filmsCount = filmService.filmsCount(titleSearch, yearSearch, genreSearch, countrySearch);
         int pagesCount = (filmsCount + 9)/10;
+        int allFilmsCount = filmService.allFilmsCount();
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("films");
         modelAndView.addObject("page", page);
+        modelAndView.addObject("filmList", filmList);
+        modelAndView.addObject("filmsCount", filmsCount);
+        modelAndView.addObject("allFilmsCount", allFilmsCount);
+        modelAndView.addObject("pagesCount", pagesCount);
         modelAndView.addObject("titleSearch", titleSearch);
         modelAndView.addObject("yearSearch", yearSearch);
         modelAndView.addObject("genreSearch", genreSearch);
         modelAndView.addObject("countrySearch", countrySearch);
-        modelAndView.addObject("filmsList", films);
-        modelAndView.addObject("filmsCount", filmsCount);
-        modelAndView.addObject("pagesCount", pagesCount);
         this.page = page;
         this.titleSearch = titleSearch;
         this.yearSearch = yearSearch;
@@ -57,6 +59,11 @@ public class FilmController {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("filmInfo");
         modelAndView.addObject("film", film);
+        modelAndView.addObject("page", page);
+        modelAndView.addObject("titleSearch", titleSearch);
+        modelAndView.addObject("yearSearch", yearSearch);
+        modelAndView.addObject("genreSearch", genreSearch);
+        modelAndView.addObject("countrySearch", countrySearch);
         return modelAndView;
     }
 
@@ -67,6 +74,10 @@ public class FilmController {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("editPage");
         modelAndView.addObject("film", film);
+        modelAndView.addObject("titleSearch", titleSearch);
+        modelAndView.addObject("yearSearch", yearSearch);
+        modelAndView.addObject("genreSearch", genreSearch);
+        modelAndView.addObject("countrySearch", countrySearch);
         return modelAndView;
     }
 
@@ -76,13 +87,17 @@ public class FilmController {
         if (film.getCountry().equals("mistake")) {
             modelAndView.setViewName("redirect:" + film.getTitle());
         } else
-        if (filmService.checkTitle(film.getTitle())) {
+        if (filmService.isUnique(film.getTitle(), film.getYear())) {
             modelAndView.setViewName("redirect:/");
             modelAndView.addObject("page", page);
+            modelAndView.addObject("titleSearch", titleSearch);
+            modelAndView.addObject("yearSearch", yearSearch);
+            modelAndView.addObject("genreSearch", genreSearch);
+            modelAndView.addObject("countrySearch", countrySearch);
             filmService.add(film);
         } else {
             modelAndView.addObject("message","part with title \"" + film.getTitle() + "\" already exists");
-            modelAndView.setViewName("redirect:/");
+            modelAndView.setViewName("redirect:/add");
         }
         return modelAndView;
     }
@@ -101,9 +116,13 @@ public class FilmController {
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     public ModelAndView editFilm(@ModelAttribute("film") Film film) {
         ModelAndView modelAndView = new ModelAndView();
-        if (filmService.checkTitle(film.getTitle()) || filmService.getById(film.getId()).getTitle().equals(film.getTitle())) {
+        if (filmService.isUnique(film.getTitle(), film.getYear()) || filmService.getById(film.getId()).getTitle().equals(film.getTitle())) {
             modelAndView.setViewName("redirect:/");
             modelAndView.addObject("page", page);
+            modelAndView.addObject("titleSearch", titleSearch);
+            modelAndView.addObject("yearSearch", yearSearch);
+            modelAndView.addObject("genreSearch", genreSearch);
+            modelAndView.addObject("countrySearch", countrySearch);
             filmService.edit(film);
         } else {
             modelAndView.addObject("message","part with title \"" + film.getTitle() + "\" already exists");
@@ -120,6 +139,10 @@ public class FilmController {
                 this.page - 1 : this.page;
         modelAndView.setViewName("redirect:/");
         modelAndView.addObject("page", page);
+        modelAndView.addObject("titleSearch", titleSearch);
+        modelAndView.addObject("yearSearch", yearSearch);
+        modelAndView.addObject("genreSearch", genreSearch);
+        modelAndView.addObject("countrySearch", countrySearch);
         Film film = filmService.getById(id);
         filmService.delete(film);
         return modelAndView;

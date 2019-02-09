@@ -81,8 +81,9 @@ public class FilmDAOImpl implements FilmDAO {
     }
 
     @Override
-    public boolean checkTitle(String title) {
+    public boolean isUnique(String title, short year) {
         Session session = sessionFactory.getCurrentSession();
-        return session.createQuery("from Film where title = :title").setParameter("title", title).list().isEmpty();
+        return session.createQuery("from Film where title = :title and year = :year")
+                .setParameter("title", title).setParameter("year", year).list().isEmpty();
     }
 }
