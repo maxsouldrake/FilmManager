@@ -16,7 +16,7 @@
             </form>
         </div>
         <div class="main-random">
-            <a href="" title="редактировать">
+            <a href="<c:url value="/film"/>" title="получить случайны фильм">
                 <span class="icon icon-edit">случайный</span>
             </a>
         </div>

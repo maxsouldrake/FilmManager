@@ -67,6 +67,15 @@ public class FilmController {
         return modelAndView;
     }
 
+    @RequestMapping(value = "/film", method = RequestMethod.GET)
+    public ModelAndView getRandomFilm() {
+        Film film = filmService.getRandomFilm();
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("filmInfo");
+        modelAndView.addObject("film", film);
+        return modelAndView;
+    }
+
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public ModelAndView addPage(@ModelAttribute("webSearchQuery") String webSearchQuery,
                                 @ModelAttribute("message") String message) {
@@ -96,7 +105,7 @@ public class FilmController {
             modelAndView.addObject("countrySearch", countrySearch);
             filmService.add(film);
         } else {
-            modelAndView.addObject("message","part with title \"" + film.getTitle() + "\" already exists");
+            modelAndView.addObject("message","film with title \"" + film.getTitle() + "\" already exists");
             modelAndView.setViewName("redirect:/add");
         }
         return modelAndView;
@@ -125,7 +134,7 @@ public class FilmController {
             modelAndView.addObject("countrySearch", countrySearch);
             filmService.edit(film);
         } else {
-            modelAndView.addObject("message","part with title \"" + film.getTitle() + "\" already exists");
+            modelAndView.addObject("message","film with title \"" + film.getTitle() + "\" already exists");
             modelAndView.setViewName("redirect:/edit/" +  + film.getId());
         }
         return modelAndView;

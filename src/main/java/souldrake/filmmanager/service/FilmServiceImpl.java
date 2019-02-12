@@ -9,10 +9,8 @@ import souldrake.filmmanager.dao.FilmDAO;
 import souldrake.filmmanager.model.Film;
 
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
-import java.net.URLEncoder;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
@@ -61,6 +59,12 @@ public class FilmServiceImpl implements FilmService {
 
     @Override
     @Transactional
+    public Film getRandomFilm() {
+        return filmDAO.getRandomFilm();
+    }
+
+    @Override
+    @Transactional
     public int filmsCount(String titleSearch, String yearSearch, String genreSearch, String countrySearch) {
         return filmDAO.filmsCount(titleSearch, yearSearch, genreSearch, countrySearch);
     }
@@ -79,12 +83,10 @@ public class FilmServiceImpl implements FilmService {
 
     @Override
     public Film getFilmFromWeb(String webSearchQuery) {
-        Film film = new Film();
-        String url = "https://www.kinopoisk.ru";
         Document doc;
+        String url = "http://www.google.com";
         try {
-            String queryValue = URLEncoder.encode(webSearchQuery, "windows-1251");
-            doc = Jsoup.connect(url + "/index.php?kp_query=" + queryValue)
+            doc = Jsoup.connect(url + "/search?q=кинопоиск " + webSearchQuery)
                     .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) " +
                             "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36")
                     .referrer(url)
@@ -96,8 +98,8 @@ public class FilmServiceImpl implements FilmService {
 
         String filmLink;
         try {
-            filmLink = doc.select("div.most_wanted div.info a.js-serp-metrika").first().attr("href");
-            doc = Jsoup.connect(url + filmLink)
+            filmLink = doc.select("div.rc div.r a").first().attr("href");
+            doc = Jsoup.connect(filmLink)
                     .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) " +
                             "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36")
                     .referrer(url)
@@ -106,6 +108,7 @@ public class FilmServiceImpl implements FilmService {
             e.printStackTrace();
         }
 
+        Film film = new Film();
         try {
             String filmTitle = doc.select("h1.moviename-big").text();
             film.setTitle(filmTitle);
@@ -163,14 +166,14 @@ public class FilmServiceImpl implements FilmService {
         try {
             String filmPosterLink = doc.select("a.popupBigImage").first().attr("onclick").split("'")[1];
             String filmPoster = filmPosterLink.split("/")[filmPosterLink.split("/").length - 1];
-            URL website = new URL(url + filmPosterLink);
+            URL website = new URL("https://www.kinopoisk.ru" + filmPosterLink);
             try (InputStream in = website.openStream()) {
                 Files.copy(in, Paths.get("D:\\other\\JAVA\\FilmManager\\src\\main\\webapp\\res\\posters\\" + filmPoster), StandardCopyOption.REPLACE_EXISTING);
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
             film.setPoster(filmPoster);
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         film.setDate(new Date(System.currentTimeMillis()));

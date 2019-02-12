@@ -10,6 +10,7 @@ public interface FilmService {
     void delete(Film film);
     void edit(Film film);
     Film getById(int id);
+    Film getRandomFilm();
 
     int filmsCount(String titleSearch, String yearSearch, String genreSearch, String countrySearch);
     int allFilmsCount();
