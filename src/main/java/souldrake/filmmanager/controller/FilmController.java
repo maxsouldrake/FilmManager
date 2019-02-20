@@ -41,10 +41,10 @@ public class FilmController {
         modelAndView.addObject("filmsCount", filmsCount);
         modelAndView.addObject("allFilmsCount", allFilmsCount);
         modelAndView.addObject("pagesCount", pagesCount);
-        modelAndView.addObject("titleSearch", titleSearch);
-        modelAndView.addObject("yearSearch", yearSearch);
-        modelAndView.addObject("genreSearch", genreSearch);
-        modelAndView.addObject("countrySearch", countrySearch);
+        if(!titleSearch.isEmpty()) modelAndView.addObject("titleSearch", titleSearch);
+        if(!yearSearch.isEmpty()) modelAndView.addObject("yearSearch", yearSearch);
+        if(!genreSearch.isEmpty()) modelAndView.addObject("genreSearch", genreSearch);
+        if(!countrySearch.isEmpty()) modelAndView.addObject("countrySearch", countrySearch);
         this.page = page;
         this.titleSearch = titleSearch;
         this.yearSearch = yearSearch;
@@ -60,10 +60,10 @@ public class FilmController {
         modelAndView.setViewName("filmInfo");
         modelAndView.addObject("film", film);
         modelAndView.addObject("page", page);
-        modelAndView.addObject("titleSearch", titleSearch);
-        modelAndView.addObject("yearSearch", yearSearch);
-        modelAndView.addObject("genreSearch", genreSearch);
-        modelAndView.addObject("countrySearch", countrySearch);
+        if(!titleSearch.isEmpty()) modelAndView.addObject("titleSearch", titleSearch);
+        if(!yearSearch.isEmpty()) modelAndView.addObject("yearSearch", yearSearch);
+        if(!genreSearch.isEmpty()) modelAndView.addObject("genreSearch", genreSearch);
+        if(!countrySearch.isEmpty()) modelAndView.addObject("countrySearch", countrySearch);
         return modelAndView;
     }
 
@@ -83,10 +83,6 @@ public class FilmController {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("editPage");
         modelAndView.addObject("film", film);
-        modelAndView.addObject("titleSearch", titleSearch);
-        modelAndView.addObject("yearSearch", yearSearch);
-        modelAndView.addObject("genreSearch", genreSearch);
-        modelAndView.addObject("countrySearch", countrySearch);
         return modelAndView;
     }
 
@@ -99,10 +95,10 @@ public class FilmController {
         if (filmService.isUnique(film.getTitle(), film.getYear())) {
             modelAndView.setViewName("redirect:/");
             modelAndView.addObject("page", page);
-            modelAndView.addObject("titleSearch", titleSearch);
-            modelAndView.addObject("yearSearch", yearSearch);
-            modelAndView.addObject("genreSearch", genreSearch);
-            modelAndView.addObject("countrySearch", countrySearch);
+            if(!titleSearch.isEmpty()) modelAndView.addObject("titleSearch", titleSearch);
+            if(!yearSearch.isEmpty()) modelAndView.addObject("yearSearch", yearSearch);
+            if(!genreSearch.isEmpty()) modelAndView.addObject("genreSearch", genreSearch);
+            if(!countrySearch.isEmpty()) modelAndView.addObject("countrySearch", countrySearch);
             filmService.add(film);
         } else {
             modelAndView.addObject("message","film with title \"" + film.getTitle() + "\" already exists");
@@ -128,10 +124,10 @@ public class FilmController {
         if (filmService.isUnique(film.getTitle(), film.getYear()) || filmService.getById(film.getId()).getTitle().equals(film.getTitle())) {
             modelAndView.setViewName("redirect:/");
             modelAndView.addObject("page", page);
-            modelAndView.addObject("titleSearch", titleSearch);
-            modelAndView.addObject("yearSearch", yearSearch);
-            modelAndView.addObject("genreSearch", genreSearch);
-            modelAndView.addObject("countrySearch", countrySearch);
+            if(!titleSearch.isEmpty()) modelAndView.addObject("titleSearch", titleSearch);
+            if(!yearSearch.isEmpty()) modelAndView.addObject("yearSearch", yearSearch);
+            if(!genreSearch.isEmpty()) modelAndView.addObject("genreSearch", genreSearch);
+            if(!countrySearch.isEmpty()) modelAndView.addObject("countrySearch", countrySearch);
             filmService.edit(film);
         } else {
             modelAndView.addObject("message","film with title \"" + film.getTitle() + "\" already exists");
@@ -148,10 +144,10 @@ public class FilmController {
                 this.page - 1 : this.page;
         modelAndView.setViewName("redirect:/");
         modelAndView.addObject("page", page);
-        modelAndView.addObject("titleSearch", titleSearch);
-        modelAndView.addObject("yearSearch", yearSearch);
-        modelAndView.addObject("genreSearch", genreSearch);
-        modelAndView.addObject("countrySearch", countrySearch);
+        if(!titleSearch.isEmpty()) modelAndView.addObject("titleSearch", titleSearch);
+        if(!yearSearch.isEmpty()) modelAndView.addObject("yearSearch", yearSearch);
+        if(!genreSearch.isEmpty()) modelAndView.addObject("genreSearch", genreSearch);
+        if(!countrySearch.isEmpty()) modelAndView.addObject("countrySearch", countrySearch);
         Film film = filmService.getById(id);
         filmService.delete(film);
         return modelAndView;

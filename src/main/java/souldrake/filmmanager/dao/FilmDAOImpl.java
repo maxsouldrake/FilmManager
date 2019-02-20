@@ -62,9 +62,7 @@ public class FilmDAOImpl implements FilmDAO {
     @Override
     public Film getRandomFilm() {
         Session session = sessionFactory.getCurrentSession();
-        int maxId = session.createQuery("select max(id) from Film", Number.class)
-                .getSingleResult().intValue();
-        return (Film) session.createQuery("from Film").setFirstResult(new Random().nextInt(maxId))
+        return (Film) session.createQuery("from Film").setFirstResult(new Random().nextInt(allFilmsCount()))
                 .setMaxResults(1).getSingleResult();
     }
 

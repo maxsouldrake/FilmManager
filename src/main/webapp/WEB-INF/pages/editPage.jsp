@@ -66,7 +66,7 @@
         </table>
         <div class="inf-description">
             <p>Описание</p>
-            <textarea name="description" placeholder="description" required>${film.description}</textarea>
+            <textarea name="description" placeholder="description" required form="add-form">${film.description}</textarea>
         </div>
         <div class="inf-action">
             <c:if test="${pageContext.request.queryString != null}">
@@ -81,7 +81,6 @@
                 <input type="hidden" name="id" value="${film.id}">
                 <input type="hidden" name="actors" value="${film.actors}">
                 <input type="hidden" name="date" value="${film.date}">
-                <input type="hidden" name="description" value="${film.description}">
                 <input type="hidden" name="poster" value="${film.poster}">
                 <input type="submit" value="${var}">
             </form>
