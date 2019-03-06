@@ -78,6 +78,10 @@
                     <c:if test="${!empty countrySearch}">
                         <c:param name="countrySearch" value="${countrySearch}"/>
                     </c:if>
+                    <c:if test="${!sortBy.equals('id')}">
+                        <c:param name="sortBy" value="${sortBy}"/>
+                        <c:param name="sortDirection" value="${sortDirection}"/>
+                    </c:if>
                 </c:url>
                 <a href="${url}" title="вернуться к списку фильмов">
                     <span class="icon icon-watch"></span>

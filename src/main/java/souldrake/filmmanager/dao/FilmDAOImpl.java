@@ -21,13 +21,16 @@ public class FilmDAOImpl implements FilmDAO {
 
     @Override
     @SuppressWarnings("unchecked")
-    public List<Film> allFilms(int page,  String titleSearch, String yearSearch, String genreSearch, String countrySearch) {
+    public List<Film> allFilms(int page,
+                               String titleSearch, String yearSearch, String genreSearch, String countrySearch,
+                               String sortBy, String sortDirection) {
         Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("from Film where 1 = 1 and " +
                 "(:titleSearch is null or lower(title) like lower(:titleSearch)) and " +
                 "(:yearSearch is null or lower(year) like lower(:yearSearch)) and " +
                 "(:genreSearch is null or lower(genre) like lower(:genreSearch)) and " +
-                "(:countrySearch is null or lower(country) like lower(:countrySearch))");
+                "(:countrySearch is null or lower(country) like lower(:countrySearch))" +
+                "order by " + sortBy + " " + sortDirection);
         query.setParameter("titleSearch", "%" + titleSearch + "%");
         query.setParameter("yearSearch", "%" + yearSearch + "%");
         query.setParameter("genreSearch", "%" + genreSearch + "%");

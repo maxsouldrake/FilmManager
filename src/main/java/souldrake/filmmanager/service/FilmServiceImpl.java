@@ -29,8 +29,10 @@ public class FilmServiceImpl implements FilmService {
 
     @Override
     @Transactional
-    public List<Film> allFilms(int page, String titleSearch, String yearSearch, String genreSearch, String countrySearch) {
-        return filmDAO.allFilms(page, titleSearch, yearSearch, genreSearch, countrySearch);
+    public List<Film> allFilms(int page,
+                               String titleSearch, String yearSearch, String genreSearch, String countrySearch,
+                               String sortBy, String sortDirection) {
+        return filmDAO.allFilms(page, titleSearch, yearSearch, genreSearch, countrySearch, sortBy, sortDirection);
     }
 
     @Override

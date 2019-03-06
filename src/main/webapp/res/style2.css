@@ -371,14 +371,17 @@ input:hover {
 
 .col-ny {
     width: 40px;
+    cursor: pointer;
 }
 
 .col-gc {
     width: 80px;
+    cursor: pointer;
 }
 
 .col-t {
     width: 40%;
+    cursor: pointer;
 }
 
 .left-side {
