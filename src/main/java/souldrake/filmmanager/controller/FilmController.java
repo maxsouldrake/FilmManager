@@ -1,5 +1,6 @@
 package souldrake.filmmanager.controller;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +12,7 @@ import java.util.List;
 
 @Controller
 public class FilmController {
+    private static final Logger log = Logger.getLogger(FilmController.class);
     private int page;
     private String titleSearch;
     private String yearSearch;
@@ -34,6 +36,10 @@ public class FilmController {
                                  @RequestParam(required = false, defaultValue = "") String countrySearch,
                                  @RequestParam(required = false, defaultValue = "id") String sortBy,
                                  @RequestParam(required = false, defaultValue = "asc") String sortDirection) {
+        log.info("allFilms by searching terms: title - " + titleSearch +
+                ", year - " + yearSearch + ", genre - " + genreSearch +
+                ", country - " + countrySearch + ", sorted by " + sortBy +
+                " " + sortDirection + ", page - " + page);
         List<Film> filmList = filmService.allFilms(page, titleSearch, yearSearch, genreSearch, countrySearch, sortBy, sortDirection);
         int filmsCount = filmService.filmsCount(titleSearch, yearSearch, genreSearch, countrySearch);
         int pagesCount = (filmsCount + 9)/10;
