@@ -2,6 +2,13 @@ package org.souldrake.filmmanager.model;
 
 import java.util.Date;
 
+/**
+ * Film model class
+ *
+ * @author SoulDrake
+ * @create 2021-10-26 18:41
+ **/
+
 public class Film {
     private Integer id;
     private String title;
