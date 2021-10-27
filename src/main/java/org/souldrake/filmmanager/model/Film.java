@@ -19,7 +19,21 @@ public class Film {
     private byte priority;
     private String actors;
     private String description;
-    private String poster;
+    private String posterUrl;
+
+    public Film(Integer id, String title, int year, String genre, String country,
+                Date date, byte priority, String actors, String description, String posterUrl) {
+        this.id = id;
+        this.title = title;
+        this.year = year;
+        this.genre = genre;
+        this.country = country;
+        this.date = date;
+        this.priority = priority;
+        this.actors = actors;
+        this.description = description;
+        this.posterUrl = posterUrl;
+    }
 
     public Integer getId() {
         return id;
@@ -93,12 +107,16 @@ public class Film {
         this.description = description;
     }
 
-    public String getPoster() {
-        return poster;
+    public String getPosterUrl() {
+        return posterUrl;
     }
 
-    public void setPoster(String poster) {
-        this.poster = poster;
+    public void setPosterUrl(String posterUrl) {
+        this.posterUrl = posterUrl;
+    }
+
+    public boolean isNew() {
+        return id == null;
     }
 
     @Override
@@ -113,7 +131,7 @@ public class Film {
                 ", priority=" + priority +
                 ", actors=" + actors +
                 ", description=" + description +
-                ", poster=" + poster +
+                ", poster=" + posterUrl +
                 '}';
     }
 }
