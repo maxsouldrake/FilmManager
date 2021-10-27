@@ -1,5 +1,7 @@
 package org.souldrake.filmmanager.web;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.souldrake.filmmanager.model.Film;
 import org.souldrake.filmmanager.repository.FilmRepository;
 import org.souldrake.filmmanager.repository.InMemoryFilmRepository;
@@ -22,33 +24,37 @@ import java.util.Objects;
 
 @WebServlet(urlPatterns = "/films", name = "filmServlet")
 public class FilmServlet  extends HttpServlet {
+    protected final Logger log = LoggerFactory.getLogger(getClass());
     private FilmRepository filmRepository;
 
     @Override
     public void init() {
+        log.debug("init InMemoryFilmRepository");
         filmRepository = new InMemoryFilmRepository();
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
-
         switch (action == null ? "all" : action) {
             case "delete" -> {
-                int id = getId(req);
-                filmRepository.delete(id);
+                log.debug("delete film with id {}", getId(req));
+                filmRepository.delete(getId(req));
                 resp.sendRedirect("films");
             }
             case "create" -> {
+                log.debug("get form for new film");
                 req.setAttribute("film", new Film(null, "newTitle", 2222, "newGenre", "newCountry",
                         (new Date()).toString(), (byte) 1, "jillian", "newDescription", "newPosterUrl"));
                 req.getRequestDispatcher("/filmForm.jsp").forward(req, resp);
             }
             case "update" -> {
+                log.debug("get form for update film with id {}", getId(req));
                 req.setAttribute("film", filmRepository.get(getId(req)));
                 req.getRequestDispatcher("/filmForm.jsp").forward(req, resp);
             }
             default -> {
+                log.debug("get all films");
                 req.setAttribute("films", filmRepository.getAll());
                 req.getRequestDispatcher("/films.jsp").forward(req, resp);
             }
@@ -72,8 +78,10 @@ public class FilmServlet  extends HttpServlet {
                 req.getParameter("posterUrl"));
 
         if (film.isNew()) {
+            log.debug("create new film");
             filmRepository.create(film);
         } else {
+            log.debug("update film with id {}", getId(req));
             filmRepository.update(film);
         }
         resp.sendRedirect("films");

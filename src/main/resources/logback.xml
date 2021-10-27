@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="30 seconds">
+
+    <jmxConfigurator/>
+
+    <appender name="file" class="ch.qos.logback.core.FileAppender">
+        <file>D:/other/JAVA/FilmManager/log/FilmManager.log</file>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>D:/other/JAVA/FilmManager/log/archived/app.%d{yyyy-MM-dd_HH}.%i.log.gz</fileNamePattern>
+            <maxFileSize>3KB</maxFileSize>
+            <totalSizeCap>10MB</totalSizeCap>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+
+        <encoder>
+            <charset>UTF-8</charset>
+            <pattern>%date %-5level %logger{50}.%M:%L - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <charset>UTF-8</charset>
+            <pattern>%d{HH:mm:ss.SSS} %-5level %class{50}.%M:%L - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="org.souldrake.filmmanager" level="debug"/>
+
+    <root level="info">
+        <appender-ref ref="file"/>
+        <appender-ref ref="console"/>
+    </root>
+</configuration>
