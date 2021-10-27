@@ -40,7 +40,7 @@ public class FilmServlet  extends HttpServlet {
                 resp.sendRedirect("films");
             }
             case "create" -> {
-                req.setAttribute("film", new Film(filmRepository.getId(), "newTitle", 2222, "newGenre", "newCountry",
+                req.setAttribute("film", new Film(null, "newTitle", 2222, "newGenre", "newCountry",
                         (new Date()).toString(), (byte) 1, "jillian", "newDescription", "newPosterUrl"));
                 req.getRequestDispatcher("/filmForm.jsp").forward(req, resp);
             }
