@@ -12,9 +12,10 @@ import java.util.List;
  **/
 
 public interface FilmRepository {
-    List<Film> allFilms();
+    List<Film> getAll();
     Film create(Film film);
     Film update(Film film);
     boolean delete(int id);
     Film get(int id);
+    int getId();
 }

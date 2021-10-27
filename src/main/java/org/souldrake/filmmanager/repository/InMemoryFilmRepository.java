@@ -24,21 +24,21 @@ public class InMemoryFilmRepository implements FilmRepository{
 
     {
         Film film1 = new Film(counter.incrementAndGet(), "title1", 1, "genre1","country1",
-                new Date(), (byte) 1, "actors1", "description1", "posterUrl1");
+                (new Date()).toString(), (byte) 1, "actors1", "description1", "posterUrl1");
         Film film2 = new Film(counter.incrementAndGet(), "title2", 2, "genre2","country2",
-                new Date(), (byte) 2, "actors2", "description2", "posterUrl2");
+                (new Date()).toString(), (byte) 2, "actors2", "description2", "posterUrl2");
         Film film3 = new Film(counter.incrementAndGet(), "title3", 3, "genre3","country3",
-                new Date(), (byte) 3, "actors3", "description3", "posterUrl3");
+                (new Date()).toString(), (byte) 3, "actors3", "description3", "posterUrl3");
         Film film4 = new Film(counter.incrementAndGet(), "title4", 4, "genre4","country4",
-                new Date(), (byte) 4, "actors4", "description4", "posterUrl4");
+                (new Date()).toString(), (byte) 4, "actors4", "description4", "posterUrl4");
         Film film5 = new Film(counter.incrementAndGet(), "title5", 5, "genre5","country5",
-                new Date(), (byte) 5, "actors5", "description5", "posterUrl5");
+                (new Date()).toString(), (byte) 5, "actors5", "description5", "posterUrl5");
         repository = Stream.of(film1, film2, film3, film4, film5).collect(Collectors.toMap(Film::getId, Function.identity()));
     }
 
 
     @Override
-    public List<Film> allFilms() {
+    public List<Film> getAll() {
         return repository.values().stream().toList();
     }
 
@@ -62,5 +62,9 @@ public class InMemoryFilmRepository implements FilmRepository{
     @Override
     public Film get(int id) {
         return repository.get(id);
+    }
+
+    public int getId() {
+        return counter.incrementAndGet();
     }
 }

@@ -15,14 +15,14 @@ public class Film {
     private int year;
     private String genre;
     private String country;
-    private Date date;
+    private String date;
     private byte priority;
     private String actors;
     private String description;
     private String posterUrl;
 
     public Film(Integer id, String title, int year, String genre, String country,
-                Date date, byte priority, String actors, String description, String posterUrl) {
+                String date, byte priority, String actors, String description, String posterUrl) {
         this.id = id;
         this.title = title;
         this.year = year;
@@ -75,11 +75,11 @@ public class Film {
         this.country = country;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
