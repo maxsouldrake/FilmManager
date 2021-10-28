@@ -1,30 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration scan="true" scanPeriod="30 seconds">
-
     <jmxConfigurator/>
-
+    <property name="LOG_PATH" value="D:/other/JAVA/FilmManager/log" />
+    <property name="LOG_ARCHIVE" value="${LOG_PATH}/archive" />
+    <property name="pattern" value="[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%-5level] [%class{50}.%M:%L] - %msg%n" />
+    <timestamp key="timestamp-by-second" datePattern="yyyyMMdd'T'HHmmss"/>
     <appender name="file" class="ch.qos.logback.core.FileAppender">
-        <file>D:/other/JAVA/FilmManager/log/FilmManager.log</file>
+        <file>${LOG_PATH}/${timestamp-by-second}.log</file>
+        <encoder>
+            <charset>UTF-8</charset>
+            <pattern>${pattern}</pattern>
+        </encoder>
+    </appender>
 
+    <appender name="rollingFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_PATH}/rollingfile.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
-            <fileNamePattern>D:/other/JAVA/FilmManager/log/archived/app.%d{yyyy-MM-dd_HH}.%i.log.gz</fileNamePattern>
-            <maxFileSize>3KB</maxFileSize>
+            <fileNamePattern>${LOG_ARCHIVE}/app.%d${timestamp-by-second}.%i.log.gz</fileNamePattern>
+            <maxFileSize>10KB</maxFileSize>
             <totalSizeCap>10MB</totalSizeCap>
             <maxHistory>30</maxHistory>
         </rollingPolicy>
-
         <encoder>
             <charset>UTF-8</charset>
-            <pattern>%date %-5level %logger{50}.%M:%L - %msg%n</pattern>
+            <pattern>${pattern}</pattern>
         </encoder>
+    </appender>
+
+    <appender name="async" class="ch.qos.logback.classic.AsyncAppender">
+        <appender-ref ref="rollingFile" />
     </appender>
 
     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <charset>UTF-8</charset>
-            <pattern>%d{HH:mm:ss.SSS} %-5level %class{50}.%M:%L - %msg%n</pattern>
+            <pattern>${pattern}</pattern>
         </encoder>
     </appender>
+
+    <logger name="org.souldrake.filmmanager"  level="debug" additivity="false">
+        <appender-ref ref="console" />
+        <appender-ref ref="file" />
+        <appender-ref ref="async" />
+    </logger>
 
     <logger name="org.souldrake.filmmanager" level="debug"/>
 
