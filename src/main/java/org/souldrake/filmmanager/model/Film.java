@@ -1,6 +1,6 @@
 package org.souldrake.filmmanager.model;
 
-import java.util.Date;
+import java.util.Objects;
 
 /**
  * Film model class
@@ -133,5 +133,26 @@ public class Film {
                 ", description=" + description +
                 ", poster=" + posterUrl +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Film film = (Film) o;
+        return year == film.year && priority == film.priority
+                && id.equals(film.id) && title.equals(film.title)
+                && genre.equals(film.genre) && country.equals(film.country)
+                && date.equals(film.date) && actors.equals(film.actors)
+                && description.equals(film.description) && posterUrl.equals(film.posterUrl);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, title, year, genre, country, date, priority, actors, description, posterUrl);
     }
 }
