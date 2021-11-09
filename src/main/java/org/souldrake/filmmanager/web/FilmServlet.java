@@ -2,9 +2,11 @@ package org.souldrake.filmmanager.web;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.souldrake.filmmanager.config.SpringApp;
 import org.souldrake.filmmanager.model.Film;
 import org.souldrake.filmmanager.repository.FilmRepository;
-import org.souldrake.filmmanager.repository.InMemoryFilmRepository;
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,14 +25,24 @@ import java.util.Objects;
  **/
 
 @WebServlet(urlPatterns = "/films", name = "filmServlet")
-public class FilmServlet  extends HttpServlet {
+public class FilmServlet extends HttpServlet {
     protected final Logger log = LoggerFactory.getLogger(getClass());
+
+    private ConfigurableApplicationContext applicationContext;
+
     private FilmRepository filmRepository;
+
 
     @Override
     public void init() {
-        log.debug("init InMemoryFilmRepository");
-        filmRepository = new InMemoryFilmRepository();
+        applicationContext = new AnnotationConfigApplicationContext(SpringApp.class);
+        filmRepository = applicationContext.getBean(FilmRepository.class);
+    }
+
+    @Override
+    public void destroy() {
+        applicationContext.close();
+        super.destroy();
     }
 
     @Override

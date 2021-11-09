@@ -1,6 +1,7 @@
 package org.souldrake.filmmanager.repository;
 
 import org.souldrake.filmmanager.model.Film;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Map;
@@ -17,6 +18,7 @@ import java.util.stream.Stream;
  * @create 2021-10-27 12:46
  **/
 
+@Repository
 public class InMemoryFilmRepository implements FilmRepository {
     private final Map<Integer, Film> repository;
     private final AtomicInteger counter = new AtomicInteger(0);
