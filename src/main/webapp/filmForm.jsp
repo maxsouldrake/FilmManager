@@ -2,7 +2,7 @@
   author: SoulDrake
   created: 27.10.2021  14:56
 --%>
-<%@ page contentType="text/html;charset=UTF-8"%>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
     <title>Film Form</title>
