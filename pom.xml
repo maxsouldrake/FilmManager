@@ -31,6 +31,16 @@
 
         <!--    Spring  -->
         <spring.version>5.3.12</spring.version>
+        <spring-data-jpa.version>2.6.0</spring-data-jpa.version>
+
+        <!--    Database    -->
+        <postgresql.version>42.3.0</postgresql.version>
+
+        <!--   Hibernate    -->
+        <hibernate.version>5.6.1.Final</hibernate.version>
+
+        <!--    Tomcat  -->
+        <tomcat.version>9.0.54</tomcat.version>
     </properties>
 
     <dependencies>
@@ -39,6 +49,31 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-context-support</artifactId>
             <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-jpa</artifactId>
+            <version>${spring-data-jpa.version}</version>
+        </dependency>
+
+        <!--    Hibernate   -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>${hibernate.version}</version>
+        </dependency>
+
+        <!--    Database    -->
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>${postgresql.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.tomcat</groupId>
+            <artifactId>tomcat-jdbc</artifactId>
+            <version>${tomcat.version}</version>
+            <scope>provided</scope>
         </dependency>
 
         <!-- Logging with SLF4J & LogBack -->
