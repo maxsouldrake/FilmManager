@@ -1,6 +1,6 @@
 DELETE FROM films;
 
-INSERT INTO films (title, year, genre, date, actors, description, poster, country, priority)
+INSERT INTO films (title, year, genre, date, actors, description, poster_url, country, priority)
 VALUES
     ('film 1', 2001, 'fantasy', '2019-01-14', '1,2,3,4,5', 'description', '328', 'USA', 5),
     ('film 2', 2002, 'fantasy', '2019-01-14', '1,2,3,4,5', 'description', '328', 'USA', 5),

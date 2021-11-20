@@ -9,7 +9,7 @@ CREATE TABLE films
     date            DATE                NOT NULL                                                DEFAULT now(),
     actors          VARCHAR(128)        NOT NULL,
     description     TEXT                NOT NULL,
-    poster          VARCHAR(32)         NOT NULL,
+    poster_url          VARCHAR(32)         NOT NULL,
     country         VARCHAR(16)         NOT NULL,
     priority        SMALLINT            NOT NULL    CHECK (priority > 0 AND priority < 11)      DEFAULT 5
 );
