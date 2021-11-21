@@ -1,6 +1,9 @@
 package org.souldrake.filmmanager.model;
 
-import java.util.Objects;
+import org.hibernate.Hibernate;
+
+import javax.persistence.*;
+import java.time.LocalDate;
 
 /**
  * Film model class
@@ -9,20 +12,28 @@ import java.util.Objects;
  * @create 2021-10-26 18:41
  **/
 
+@Entity
+@Table(name = "films", uniqueConstraints = {@UniqueConstraint(columnNames = {"title", "year"}, name = "films_title_year_unique_index")})
 public class Film {
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "film_id_seq")
     private Integer id;
     private String title;
     private int year;
     private String genre;
     private String country;
-    private String date;
+    private LocalDate date;
     private byte priority;
     private String actors;
     private String description;
+    @Column(name = "poster_url")
     private String posterUrl;
 
+    public Film() {}
+
     public Film(Integer id, String title, int year, String genre, String country,
-                String date, byte priority, String actors, String description, String posterUrl) {
+                LocalDate date, byte priority, String actors, String description, String posterUrl) {
         this.id = id;
         this.title = title;
         this.year = year;
@@ -75,11 +86,11 @@ public class Film {
         this.country = country;
     }
 
-    public String getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
@@ -140,19 +151,15 @@ public class Film {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (o == null || !getClass().equals(Hibernate.getClass(o))) {
             return false;
         }
         Film film = (Film) o;
-        return year == film.year && priority == film.priority
-                && id.equals(film.id) && title.equals(film.title)
-                && genre.equals(film.genre) && country.equals(film.country)
-                && date.equals(film.date) && actors.equals(film.actors)
-                && description.equals(film.description) && posterUrl.equals(film.posterUrl);
+        return id != null && id.equals(film.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, year, genre, country, date, priority, actors, description, posterUrl);
+        return id == null ? 0 : id;
     }
 }
