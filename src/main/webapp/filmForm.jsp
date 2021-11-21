@@ -41,7 +41,7 @@
         <dl>
             <dt>Date:</dt>
             <dd><label>
-                <input type="text" value="${requestScope.film.date}" name="date" required>
+                <input type="date" value="${requestScope.film.date}" name="date" required>
             </label></dd>
         </dl>
         <dl>
