@@ -41,6 +41,8 @@ public class PersistenceConfig {
         properties.put("hibernate.format_sql", environment.getRequiredProperty("hibernate.format_sql"));
         properties.put("hibernate.use_sql_comments", environment.getRequiredProperty("hibernate.use_sql_comments"));
         properties.put("hibernate.hibernate.ejb.naming_strategy", environment.getRequiredProperty("hibernate.ejb.naming_strategy"));
+        properties.put("hibernate.jpa.compliance.proxy", environment.getRequiredProperty("hibernate.jpa.compliance.proxy"));
+        properties.put("hibernate.current_session_context_class", environment.getRequiredProperty("hibernate.current_session_context_class"));
         return properties;
     }
 
