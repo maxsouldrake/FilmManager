@@ -142,7 +142,7 @@ public class Film {
                 ", priority=" + priority +
                 ", actors=" + actors +
                 ", description=" + description +
-                ", poster=" + posterUrl +
+                ", posterUrl=" + posterUrl +
                 '}';
     }
 

@@ -18,7 +18,7 @@ import java.util.List;
 @Service
 @Transactional(readOnly = true)
 public class FilmService {
-    FilmRepository filmRepository;
+    private final FilmRepository filmRepository;
 
     public FilmService(FilmRepository filmRepository) {
         this.filmRepository = filmRepository;

@@ -29,7 +29,7 @@ import java.util.Objects;
 
 @WebServlet(urlPatterns = "/films", name = "filmServlet")
 public class FilmServlet extends HttpServlet {
-    protected final Logger log = LoggerFactory.getLogger(getClass());
+    private final Logger log = LoggerFactory.getLogger(getClass());
 
     private ConfigurableApplicationContext applicationContext;
 
