@@ -30,7 +30,8 @@ public class Film {
     @Column(name = "poster_url")
     private String posterUrl;
 
-    public Film() {}
+    public Film() {
+    }
 
     public Film(Integer id, String title, int year, String genre, String country,
                 LocalDate date, byte priority, String actors, String description, String posterUrl) {

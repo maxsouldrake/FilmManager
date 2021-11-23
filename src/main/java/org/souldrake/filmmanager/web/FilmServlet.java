@@ -2,8 +2,8 @@ package org.souldrake.filmmanager.web;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.souldrake.filmmanager.config.AppConfig;
 import org.souldrake.filmmanager.config.PersistenceConfig;
-import org.souldrake.filmmanager.config.SpringApp;
 import org.souldrake.filmmanager.model.Film;
 import org.souldrake.filmmanager.service.FilmService;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -38,7 +38,7 @@ public class FilmServlet extends HttpServlet {
 
     @Override
     public void init() {
-        applicationContext = new AnnotationConfigApplicationContext(SpringApp.class, PersistenceConfig.class);
+        applicationContext = new AnnotationConfigApplicationContext(AppConfig.class, PersistenceConfig.class);
         filmService = applicationContext.getBean(FilmService.class);
     }
 

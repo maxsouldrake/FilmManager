@@ -12,5 +12,5 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @ComponentScan("org.souldrake.**.service")
-public class SpringApp {
+public class AppConfig {
 }
