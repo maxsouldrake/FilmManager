@@ -1,0 +1,32 @@
+<configuration>
+    <property name="pattern" value="[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%-5level] [%class{50}.%M:%L] - %msg%n"/>
+    <timestamp key="timestamp" datePattern="yyyyMMdd"/>
+
+    <contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator">
+        <resetJUL>true</resetJUL>
+    </contextListener>
+
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <charset>UTF-8</charset>
+            <pattern>${pattern}</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="result" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <charset>UTF-8</charset>
+            <pattern>%cyan(%msg%n)</pattern>
+        </encoder>
+    </appender>
+    <logger name="result" level="INFO" additivity="false">
+        <appender-ref ref="result"/>
+    </logger>
+
+    <logger name="org.souldrake.filmmanager" level="debug"/>
+
+    <root level="INFO">
+        <appender-ref ref="console"/>
+    </root>
+
+</configuration>

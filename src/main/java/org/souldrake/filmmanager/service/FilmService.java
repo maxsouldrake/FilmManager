@@ -28,6 +28,10 @@ public class FilmService {
         return filmRepository.findAll(sort);
     }
 
+    public List<Film> findAll() {
+        return findAll(Sort.by("year"));
+    }
+
     public Film get(int id) {
         return filmRepository.findById(id).get();
     }
