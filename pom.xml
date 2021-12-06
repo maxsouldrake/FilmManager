@@ -27,7 +27,7 @@
         <slf4j.version>1.7.32</slf4j.version>
 
         <!--    Tests   -->
-        <junit.version>4.13.2</junit.version>
+        <junit.jupiter.version>5.8.1</junit.jupiter.version>
         <assertj.version>3.21.0</assertj.version>
 
         <!--    Spring  -->
@@ -63,6 +63,12 @@
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-jpa</artifactId>
             <version>${spring-data-jpa.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>${spring.version}</version>
+            <scope>test</scope>
         </dependency>
 
         <!-- Hibernate -->
@@ -120,15 +126,9 @@
 
         <!-- Test -->
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>${junit.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-test</artifactId>
-            <version>${spring.version}</version>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>${junit.jupiter.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>

@@ -1,52 +1,49 @@
 package org.souldrake.filmmanager.service;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.souldrake.filmmanager.TestData;
 import org.souldrake.filmmanager.config.AppConfig;
 import org.souldrake.filmmanager.config.PersistenceConfig;
 import org.souldrake.filmmanager.model.Film;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.SqlConfig;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import java.util.List;
 import java.util.NoSuchElementException;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.souldrake.filmmanager.TestData.*;
 
-@ContextConfiguration(classes = {AppConfig.class, PersistenceConfig.class})
-@RunWith(SpringRunner.class)
+@SpringJUnitConfig({AppConfig.class, PersistenceConfig.class})
 @Sql(scripts = "classpath:database/populateDB.sql", config = @SqlConfig(encoding = "UTF-8"))
 public class FilmServiceTest {
     @Autowired
     FilmService filmService;
 
     @Test
-    public void findAll() {
+    void findAll() {
         List<Film> films = filmService.findAll();
-        assertThat(films).isEqualTo(TestData.FILMS);
+        assertThat(films).isEqualTo(TestData.films);
     }
 
     @Test
-    public void get() {
+    void get() {
         Film film = filmService.get(FILM_ID);
-        assertEquals(film, FILM1);
+        assertEquals(film, film1);
     }
 
     @Test
-    public void getNotFound() {
+    void getNotFound() {
         assertThrows(NoSuchElementException.class, () -> filmService.get(NOT_FOUND_ID));
     }
 
     @Test
-    public void create() {
+    void create() {
         Film newFilm = getNew();
         Film created = filmService.create(getNew());
         Integer newId = created.getId();
@@ -56,24 +53,24 @@ public class FilmServiceTest {
     }
 
     @Test
-    public void update() {
+    void update() {
         Film updated = filmService.update(getUpdated());
         assertEquals(filmService.get(FILM_ID), updated);
     }
 
     @Test
-    public void updateNotFound() {
+    void updateNotFound() {
         assertThrows(NoSuchElementException.class, () -> filmService.get(NOT_FOUND_ID));
     }
 
     @Test
-    public void delete() {
+    void delete() {
         filmService.delete(FILM_ID);
         assertThrows(NoSuchElementException.class, () -> filmService.get(FILM_ID));
     }
 
     @Test
-    public void deleteNotFound() {
+    void deleteNotFound() {
         assertThrows(EmptyResultDataAccessException.class, () -> filmService.delete(NOT_FOUND_ID));
     }
 }
