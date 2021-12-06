@@ -1,7 +1,9 @@
 package org.souldrake.filmmanager.service;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.souldrake.filmmanager.TestData;
+import org.souldrake.filmmanager.TimingExtension;
 import org.souldrake.filmmanager.config.AppConfig;
 import org.souldrake.filmmanager.config.PersistenceConfig;
 import org.souldrake.filmmanager.model.Film;
@@ -23,6 +25,7 @@ import static org.souldrake.filmmanager.TestData.*;
 
 @SpringJUnitConfig({AppConfig.class, PersistenceConfig.class})
 @Sql(scripts = "classpath:database/populateDB.sql", config = @SqlConfig(encoding = "UTF-8"))
+@ExtendWith(TimingExtension.class)
 public class FilmServiceTest {
     @Autowired
     FilmService filmService;
