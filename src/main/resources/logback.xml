@@ -45,6 +45,7 @@
     </logger>
 
     <logger name="org.souldrake.filmmanager" level="debug"/>
+    <logger name="org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver" level="debug"/>
 
     <root level="info">
         <appender-ref ref="file"/>

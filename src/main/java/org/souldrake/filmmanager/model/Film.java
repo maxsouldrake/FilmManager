@@ -1,6 +1,7 @@
 package org.souldrake.filmmanager.model;
 
 import org.hibernate.Hibernate;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -23,6 +24,8 @@ public class Film {
     private int year;
     private String genre;
     private String country;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate date;
     private byte priority;
     private String actors;
@@ -31,6 +34,11 @@ public class Film {
     private String posterUrl;
 
     public Film() {
+    }
+
+    public Film(String title, int year, String genre, String country,
+                LocalDate date, byte priority, String actors, String description, String posterUrl) {
+        this(null, title, year, genre, country, date, priority, actors, description, posterUrl);
     }
 
     public Film(Integer id, String title, int year, String genre, String country,

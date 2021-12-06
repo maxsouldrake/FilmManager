@@ -16,6 +16,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import javax.persistence.EntityManagerFactory;
 import java.util.Properties;
 
+import static org.hibernate.cfg.AvailableSettings.*;
+
 /**
  * Configuration class for persistence
  *
@@ -36,13 +38,11 @@ public class PersistenceConfig {
 
     private Properties hibernateProperties() {
         Properties properties = new Properties();
-        properties.put("hibernate.dialect", environment.getRequiredProperty("hibernate.dialect"));
-        properties.put("hibernate.show_sql", environment.getRequiredProperty("hibernate.show_sql"));
-        properties.put("hibernate.format_sql", environment.getRequiredProperty("hibernate.format_sql"));
-        properties.put("hibernate.use_sql_comments", environment.getRequiredProperty("hibernate.use_sql_comments"));
-        properties.put("hibernate.hibernate.ejb.naming_strategy", environment.getRequiredProperty("hibernate.ejb.naming_strategy"));
-        properties.put("hibernate.jpa.compliance.proxy", environment.getRequiredProperty("hibernate.jpa.compliance.proxy"));
-        properties.put("hibernate.current_session_context_class", environment.getRequiredProperty("hibernate.current_session_context_class"));
+        properties.put(DIALECT, environment.getRequiredProperty("hibernate.dialect"));
+        properties.put(SHOW_SQL, environment.getRequiredProperty("hibernate.show_sql"));
+        properties.put(FORMAT_SQL, environment.getRequiredProperty("hibernate.format_sql"));
+        properties.put(USE_SQL_COMMENTS, environment.getRequiredProperty("hibernate.use_sql_comments"));
+        properties.put(JPA_PROXY_COMPLIANCE, environment.getRequiredProperty("hibernate.jpa_proxy_compliance"));
         return properties;
     }
 
