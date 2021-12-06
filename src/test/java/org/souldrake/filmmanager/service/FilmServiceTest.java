@@ -6,11 +6,13 @@ import org.souldrake.filmmanager.config.AppConfig;
 import org.souldrake.filmmanager.config.PersistenceConfig;
 import org.souldrake.filmmanager.model.Film;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.SqlConfig;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -50,6 +52,12 @@ public class FilmServiceTest {
         newFilm.setId(newId);
         assertEquals(created, newFilm);
         assertEquals(filmService.get(newId), newFilm);
+    }
+
+    @Test
+    void duplicateTitleYearCreate() {
+        assertThrows(DataAccessException.class, () ->
+                filmService.create(new Film(film1.getTitle(), film1.getYear(), "", "", LocalDate.now(), (byte) 1, "", "", "")));
     }
 
     @Test
