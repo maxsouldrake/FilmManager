@@ -33,7 +33,7 @@ public class TestData {
 
     public static Film getNew() {
         return new Film(null, "newTitle", 1999, "newGenre", "newCountry", LocalDate.of(2009, 12, 12),
-                (byte) 7, "newActors", "newDesc", "newPoster");
+                (byte) 7, "newActors", "newDescription", "newPosterUrl");
     }
 
     public static Film getUpdated() {

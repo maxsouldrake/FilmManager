@@ -28,7 +28,7 @@ import static org.souldrake.filmmanager.TestData.*;
 @ExtendWith(TimingExtension.class)
 public class FilmServiceTest {
     @Autowired
-    FilmService filmService;
+    private FilmService filmService;
 
     @Test
     void findAll() {
