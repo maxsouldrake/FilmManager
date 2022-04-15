@@ -24,7 +24,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.souldrake.filmmanager.TestData.*;
 
 @SpringJUnitConfig({AppConfig.class, PersistenceConfig.class})
-@Sql(scripts = "classpath:database/populateDB.sql", config = @SqlConfig(encoding = "UTF-8"))
+@Sql(scripts = "classpath:database/populateDB.sql", config = @SqlConfig(encoding = "UTF-8"), executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
 @ExtendWith(TimingExtension.class)
 public class FilmServiceTest {
     @Autowired
@@ -67,11 +67,6 @@ public class FilmServiceTest {
     void update() {
         Film updated = filmService.update(getUpdated());
         assertEquals(filmService.get(FILM_ID), updated);
-    }
-
-    @Test
-    void updateNotFound() {
-        assertThrows(NoSuchElementException.class, () -> filmService.get(NOT_FOUND_ID));
     }
 
     @Test
